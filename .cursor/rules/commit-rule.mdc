@@ -1,0 +1,20 @@
+---
+alwaysApply: true
+---
+
+make a commit message in Korean based on the Conventional Commits' commit rule.
+The message should be a word or noun, not a sentenece type.
+
+The prefix of the commit message should be like these: 
+
+feat:
+fix:
+build:
+chore: 
+ci: 
+docs:
+style:
+refactor:
+perf:
+test:
+

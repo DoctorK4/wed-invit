@@ -5,6 +5,8 @@ function App() {
     await addRSVP("test", "6425");
   }
 
+  console.log('App component rendered')
+
   return (
     <>
      <h1 className="text-3xl font-bold underline">Hello World</h1>

@@ -1,1 +1,32 @@
 @import "tailwindcss";
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+:root {
+  --hot-pink-50: #fef7f8;
+  --hot-pink-100: #fde8eb;
+  --hot-pink-200: #fbced6;
+  --hot-pink-300: #f7a4b4;
+  --hot-pink-400: #f28396;
+  --hot-pink-500: #EF7B8E;
+  --hot-pink-600: #e55a73;
+  --hot-pink-700: #c93f5f;
+  --hot-pink-800: #a6334f;
+  --hot-pink-900: #8b2d46;
+}
+
+* {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.text-hot-pink-400 { color: #f28396; }
+.text-hot-pink-500 { color: #EF7B8E; }
+.text-hot-pink-600 { color: #e55a73; }
+
+.bg-hot-pink-600 { background-color: #e55a73; }
+.bg-hot-pink-700 { background-color: #c93f5f; }
+
+.hover\:bg-hot-pink-700:hover { background-color: #c93f5f; }
+
+.focus\:ring-hot-pink-500:focus { 
+  --tw-ring-color: #EF7B8E;
+}

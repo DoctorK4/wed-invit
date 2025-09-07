@@ -113,7 +113,7 @@ function App() {
         </section>
 
         {/* Contact Section */}
-        <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
+        {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">연락처</h2>
           <div className="grid grid-cols-2 gap-6 text-sm">
             <div>
@@ -129,7 +129,7 @@ function App() {
               <p className="text-gray-300">신부: 010-0000-0000</p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Directions Section */}
         <section className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">

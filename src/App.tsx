@@ -6,6 +6,7 @@ function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +17,16 @@ function App() {
       setPhone("");
     } catch (error) {
       console.error("RSVP 전송 실패:", error);
+    }
+  };
+
+  const navigateImage = (direction: 'prev' | 'next') => {
+    if (!selectedImage) return;
+    
+    if (direction === 'prev') {
+      setSelectedImage(selectedImage > 1 ? selectedImage - 1 : 4);
+    } else {
+      setSelectedImage(selectedImage < 4 ? selectedImage + 1 : 1);
     }
   };
 
@@ -56,7 +67,7 @@ function App() {
             <p className="text-lg font-light">2025년 11월 2일 일요일</p>
             <p className="text-sm">오후 12시</p>
             <div className="mt-4">
-              <p className="font-medium text-white">DITTO 레스토랑 </p>
+              <p className="font-medium text-white">DITO 레스토랑 </p>
               <p className="text-sm text-gray-300">서울특별시 서초구 명달로 94</p>
             </div>
             <div className="mt-6">
@@ -97,6 +108,49 @@ function App() {
               <p className="text-gray-300">아버지: 010-0000-0000</p>
               <p className="text-gray-300">어머니: 010-0000-0000</p>
               <p className="text-gray-300">신부: 010-0000-0000</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Directions Section */}
+        <section className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
+          <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>
+          
+          <div className="mb-4">
+            <p className="text-center text-white font-medium mb-2">DITO 레스토랑</p>
+            <p className="text-center text-gray-300 text-sm mb-4">서울특별시 서초구 명달로 94</p>
+            
+            {/* Naver Map */}
+            <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://map.naver.com/"
+                title="DITTO 레스토랑 위치"
+                className="border-0"
+              />
+            </div>
+            
+            {/* Map Links */}
+            <div className="flex justify-center gap-4">
+              <a
+                href="https://map.kakao.com/link/search/서울특별시 서초구 명달로 94"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
+              >
+                <span>🗺️</span>
+                카카오맵
+              </a>
+              <a
+                href="https://naver.me/x67yKre8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
+              >
+                <span>📍</span>
+                네이버지도
+              </a>
             </div>
           </div>
         </section>
@@ -153,7 +207,7 @@ function App() {
 
         {/* Footer */}
         <footer className="text-center mt-8 text-gray-400 text-xs">
-          <p>희진 ♥ 동률의 결혼을 축복해주세요</p>
+          <p>Developed by DRK</p>
         </footer>
 
       </div>

@@ -1,12 +1,24 @@
 import { addRSVP } from "./api/addRSVP";
 import { useState } from "react";
 import { addToCalendar } from "./service/addToCalendar";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
+  const slides = [
+    { src: "/images/gallery1.png", alt: "사진 1" },
+    { src: "/images/gallery2.png", alt: "사진 2" },
+    { src: "/images/gallery3.png", alt: "사진 3" },
+    { src: "/images/gallery4.png", alt: "사진 4" },
+  ];
 
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,16 +29,6 @@ function App() {
       setPhone("");
     } catch (error) {
       console.error("RSVP 전송 실패:", error);
-    }
-  };
-
-  const navigateImage = (direction: 'prev' | 'next') => {
-    if (!selectedImage) return;
-    
-    if (direction === 'prev') {
-      setSelectedImage(selectedImage > 1 ? selectedImage - 1 : 4);
-    } else {
-      setSelectedImage(selectedImage < 4 ? selectedImage + 1 : 1);
     }
   };
 
@@ -85,12 +87,29 @@ function App() {
         <section className="mb-8">
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">Gallery</h2>
           <div className="grid grid-cols-2 gap-3">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-square bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
-                <span className="text-gray-400 text-sm">사진 {i}</span>
-              </div>
+            {slides.map((s, i) => (
+              <button
+                key={i}
+                type="button"
+                className="aspect-square bg-gray-800 rounded-lg overflow-hidden border border-gray-700 focus:outline-none focus:ring-2 focus:ring-hot-pink-500"
+                onClick={() => {
+                  setLightboxIndex(i);
+                  setLightboxOpen(true);
+                }}
+                aria-label={`${s.alt} 크게 보기`}
+              >
+                <img src={s.src} alt={s.alt} className="w-full h-full object-cover" />
+              </button>
             ))}
           </div>
+
+          {/* Lightbox (모달) */}
+          <Lightbox
+            open={lightboxOpen}
+            close={() => setLightboxOpen(false)}
+            index={lightboxIndex}
+            slides={slides}
+          />
         </section>
 
         {/* Contact Section */}

@@ -158,7 +158,13 @@ function App() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
               >
-                <span>🗺️</span>
+                <span>
+                  <img 
+                    src="/images/kakao_map.png" 
+                    alt="카카오맵 아이콘" 
+                    className="w-4 h-4"
+                  />
+                </span>
                 카카오맵
               </a>
               <a
@@ -167,7 +173,13 @@ function App() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
               >
-                <span>📍</span>
+                <span>
+                  <img 
+                    src="/images/navermap.webp" 
+                    alt="네이버지도 아이콘" 
+                    className="w-4 h-4"
+                  />
+                </span>
                 네이버지도
               </a>
             </div>

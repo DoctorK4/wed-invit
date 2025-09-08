@@ -1,8 +1,13 @@
 import { useEffect, useRef } from "react";
 
+const CLIENT_ID = import.meta.env.VITE_NAVERMAP_API_CID as string | undefined;
+if (!CLIENT_ID) {
+  // eslint-disable-next-line no-console
+  console.error("[NaverMap] Missing VITE_NAVERMAP_API_CID in .env*");
+}
 
 const NAVER_SRC =
-  `https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${import.meta.env.VITE_NAVERMAP_API_CID}`;
+  `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${CLIENT_ID}`;
 
 function loadScriptOnce(src: string) {
   return new Promise<void>((resolve, reject) => {

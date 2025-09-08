@@ -1,7 +1,7 @@
 import { addRSVP } from "./api/addRSVP";
 import { useState } from "react";
 import { addToCalendar } from "./service/addToCalendar";
-import Lightbox from "yet-another-react-lightbox";
+// import Gallery from "./components/Gallery";
 import "yet-another-react-lightbox/styles.css";
 
 function App() {
@@ -9,16 +9,14 @@ function App() {
   const [phone, setPhone] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
-  const slides = [
-    { src: "/images/gallery1.png", alt: "사진 1" },
-    { src: "/images/gallery2.png", alt: "사진 2" },
-    { src: "/images/gallery3.png", alt: "사진 3" },
-    { src: "/images/gallery4.png", alt: "사진 4" },
-  ];
+  // const slides = [
+  //   { src: "/images/gallery1.png", alt: "사진 1" },
+  //   { src: "/images/gallery2.png", alt: "사진 2" },
+  //   { src: "/images/gallery3.png", alt: "사진 3" },
+  //   { src: "/images/gallery4.png", alt: "사진 4" },
+  // ];
 
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,34 +92,7 @@ function App() {
           </div>
         </section>
 
-        {/* Gallery Section */}
-        {/* <section className="mb-8">
-          <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">Gallery</h2>
-          <div className="grid grid-cols-2 gap-3">
-            {slides.map((s, i) => (
-              <button
-                key={i}
-                type="button"
-                className="aspect-square bg-gray-800 rounded-lg overflow-hidden border border-gray-700 focus:outline-none focus:ring-2 focus:ring-hot-pink-500"
-                onClick={() => {
-                  setLightboxIndex(i);
-                  setLightboxOpen(true);
-                }}
-                aria-label={`${s.alt} 크게 보기`}
-              >
-                <img src={s.src} alt={s.alt} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div> */}
-
-          {/* Lightbox (모달) */}
-          {/* <Lightbox
-            open={lightboxOpen}
-            close={() => setLightboxOpen(false)}
-            index={lightboxIndex}
-            slides={slides}
-          />
-        </section> */}
+        {/* <Gallery slides={slides} /> */}
 
         {/* Contact Section */}
         {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
@@ -152,13 +123,9 @@ function App() {
             
             {/* Naver Map */}
             <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://map.naver.com/"
-                title="DITTO 레스토랑 위치"
-                className="border-0"
-              />
+              <div
+                
+              ></div>
             </div>
             
             {/* Map Links */}

@@ -17,6 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL }}
+      VITE_NAVERMAP_API_CID: ${{ secrets.VITE_NAVERMAP_API_CID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,11 +31,22 @@ jobs:
           
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Verify Vite envs
+        run: |
+          if [ -z "${VITE_NAVERMAP_API_CID}" ]; then
+            echo "VITE_NAVERMAP_API_CID is missing (GitHub Secrets)." >&2
+            exit 1
+          fi
+          if [ -z "${VITE_APP_SCRIPT_URL}" ]; then
+            echo "VITE_APP_SCRIPT_URL is missing (GitHub Secrets)." >&2
+            # not fatal, comment out next line if optional
+            # exit 1
+          fi
+          echo "VITE_NAVERMAP_API_CID length: ${#VITE_NAVERMAP_API_CID} (masked)"
+          echo "VITE_APP_SCRIPT_URL length: ${#VITE_APP_SCRIPT_URL} (masked)"
         
       - name: Build with environment variables
-        env:
-          VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL }}
-          VITE_NAVERMAP_API_CID: ${{ secrets.VITE_NAVERMAP_API_CID }}
         run: bun run build
         
       - name: Setup Pages
@@ -52,4 +66,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4

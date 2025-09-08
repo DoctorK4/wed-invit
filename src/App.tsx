@@ -83,8 +83,19 @@ function App() {
           </div>
         </section>
 
-        {/* Gallery Section */}
+        {/* Ellie Letter Section */}
         <section className="mb-8">
+          <div className="w-full rounded-lg overflow-hidden">
+            <img 
+              src="/images/ellieletter.png" 
+              alt="엘리 편지" 
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </section>
+
+        {/* Gallery Section */}
+        {/* <section className="mb-8">
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">Gallery</h2>
           <div className="grid grid-cols-2 gap-3">
             {slides.map((s, i) => (
@@ -101,16 +112,16 @@ function App() {
                 <img src={s.src} alt={s.alt} className="w-full h-full object-cover" />
               </button>
             ))}
-          </div>
+          </div> */}
 
           {/* Lightbox (모달) */}
-          <Lightbox
+          {/* <Lightbox
             open={lightboxOpen}
             close={() => setLightboxOpen(false)}
             index={lightboxIndex}
             slides={slides}
           />
-        </section>
+        </section> */}
 
         {/* Contact Section */}
         {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">

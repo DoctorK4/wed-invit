@@ -3,6 +3,7 @@ import { useState } from "react";
 import { addToCalendar } from "./service/addToCalendar";
 // import Gallery from "./components/Gallery";
 import "yet-another-react-lightbox/styles.css";
+import MapSection from "./components/MapSection";
 
 function App() {
   const [name, setName] = useState("");
@@ -123,9 +124,7 @@ function App() {
             
             {/* Naver Map */}
             <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
-              <div
-                
-              ></div>
+              <MapSection />
             </div>
             
             {/* Map Links */}

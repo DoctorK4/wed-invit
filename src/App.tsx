@@ -124,13 +124,13 @@ function App() {
             
             {/* Naver Map */}
             <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
-              <MapSection />
+              <MapSection/>
             </div>
             
             {/* Map Links */}
             <div className="flex justify-center gap-4">
               <a
-                href="https://map.kakao.com/link/search/서울특별시 서초구 명달로 94"
+                href="https://map.kakao.com/?urlX=500937.99999999907&urlY=1107307.9999999981&urlLevel=3&itemId=1706770960&q=%EB%94%94%ED%86%A0%20%EC%84%9C%EC%B4%88%EC%A0%90&srcid=1706770960&map_type=TYPE_MAP"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"

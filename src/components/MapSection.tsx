@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 
 const NAVER_SRC =
-  `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${import.meta.env.VITE_NAVERMAP_API_CID}`;
+  `https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${import.meta.env.VITE_NAVERMAP_API_CID}`;
 
 function loadScriptOnce(src: string) {
   return new Promise<void>((resolve, reject) => {
@@ -32,13 +32,13 @@ export default function MapSection() {
 
         const markerMap = new naver.maps.Map(mapRef.current, {
           center: new naver.maps.LatLng(37.5665, 126.9780), // TODO: 예식장 좌표로 변경
-          zoom: 15,
+          zoom: 16,
         });
 
         new naver.maps.Marker({
           position: new naver.maps.LatLng(37.5665, 126.9780), // TODO: 예식장 좌표와 동일하게 수정
           map: markerMap,
-          title: "예식장",
+          title: "DITO",
         });
       })
       .catch(console.error);

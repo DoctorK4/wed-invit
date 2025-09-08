@@ -17,9 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     env:
-      VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL }}
-      VITE_NAVERMAP_API_CID: ${{ secrets.VITE_NAVERMAP_API_CID }}
+      VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL || vars.VITE_APP_SCRIPT_URL }}
+      VITE_NAVERMAP_API_CID: ${{ secrets.VITE_NAVERMAP_API_CID || vars.VITE_NAVERMAP_API_CID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,6 +32,10 @@ jobs:
           
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Debug context
+        run: |
+          echo "actor=$GITHUB_ACTOR event=$GITHUB_EVENT_NAME ref=$GITHUB_REF"
 
       - name: Verify Vite envs
         run: |

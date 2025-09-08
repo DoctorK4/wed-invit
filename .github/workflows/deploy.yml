@@ -32,6 +32,7 @@ jobs:
       - name: Build with environment variables
         env:
           VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL }}
+          VITE_NAVERMAP_API_CID: ${{ secrets.VITE_NAVERMAP_API_CID }}
         run: bun run build
         
       - name: Setup Pages

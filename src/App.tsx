@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="w-full px-0 py-8">
+      <div className="max-w-md mx-auto px-0 py-8">
 
         {/* Main Photo Section */}
         <section className="mb-8">
@@ -51,7 +51,7 @@ function App() {
         </section>
 
         {/* Wedding Info Section */}
-        <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
+        <section className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800">
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Wedding Day</h2>
           <div className="space-y-2 text-gray-200">
             <p className="text-lg font-light">2025년 11월 2일 일요일</p>

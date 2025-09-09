@@ -248,7 +248,7 @@ function App() {
 
         {/* Footer */}
         <footer className="text-center mt-8 text-gray-400 text-xs">
-          <p>Developed by Drk</p>
+          <p>Designed by Ellie & Developed by Drk</p>
         </footer>
 
       </div>

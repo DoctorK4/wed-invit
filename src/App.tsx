@@ -37,22 +37,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-md mx-auto px-6 py-8">
-        
-        {/* Header Section */}
-        <section className="text-center mb-8">
-          <div className="mb-4">
-            {/* <h1 className="text-4xl font-light text-white mb-2">
-             희진 & 동률
-            </h1>
-            <div className="text-2xl mb-4">🤵🏻‍♂️👰🏻‍♀️</div>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              소중한 분들을 모시고<br/>
-              인생의 새로운 출발을<br/>
-              함께 축복받고자 합니다
-            </p> */}
-          </div>
-        </section>
+      <div className="w-full px-0 py-8">
 
         {/* Main Photo Section */}
         <section className="mb-8">

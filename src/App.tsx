@@ -124,7 +124,7 @@ function App() {
             
             {/* Naver Map */}
             <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
-              <MapSection/>
+              <MapSection address="서울특별시 서초구 명달로 94"/>
             </div>
             
             {/* Map Links */}

@@ -9,6 +9,7 @@ function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
@@ -21,13 +22,16 @@ function App() {
 
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await addRSVP(name, phone);
       setIsSubmitted(true);
+      setIsLoading(false);
       setName("");
       setPhone("");
     } catch (error) {
       console.error("RSVP 전송 실패:", error);
+      setIsLoading(false);
     }
   };
 
@@ -186,6 +190,7 @@ function App() {
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-hot-pink-500 text-white placeholder-gray-400"
                   placeholder="성함을 입력해주세요"
                   required
+                  disabled={isLoading}
                 />
               </div>
               
@@ -199,15 +204,43 @@ function App() {
                   onChange={(e) => setPhone(e.target.value)}
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-hot-pink-500 text-white placeholder-gray-400"
                   placeholder="연락처를 입력해주세요"
+                  disabled={isLoading}
                   required
                 />
               </div>
               
               <button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-hot-pink-600 hover:bg-hot-pink-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200"
               >
-                참석 의사 전달하기
+                {isLoading ? (
+                  <div className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin h-5 w-5 mr-2 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                    참석의사 전달하는 중...💌
+                  </div>
+                ) : (
+                  "참석 의사 전달하기"
+                )}
               </button>
             </form>
           )}
@@ -215,7 +248,7 @@ function App() {
 
         {/* Footer */}
         <footer className="text-center mt-8 text-gray-400 text-xs">
-          <p>Developed by DRK</p>
+          <p>Developed by Drk</p>
         </footer>
 
       </div>

@@ -64,7 +64,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-md mx-auto px-0 py-8">
+      <div className="max-w-md mx-auto px-0">
 
         {/* Main Photo Section */}
         <section className="mb-8">
@@ -410,7 +410,7 @@ function App() {
         </section>
 
         {/* Footer */}
-        <footer className="text-center mt-8 text-gray-400 text-xs">
+        <footer className="text-center mt-8 pb-8 text-gray-400 text-xs">
           <p>Designed by Ellie & Developed by Drk</p>
         </footer>
 

@@ -1,6 +1,6 @@
 import { addRSVP } from "./api/addRSVP";
 import { useState } from "react";
-import { addToCalendar } from "./service/addToCalendar";
+// import { addToCalendar } from "./service/addToCalendar";
 // import Gallery from "./components/Gallery";
 import "yet-another-react-lightbox/styles.css";
 import MapSection from "./components/MapSection";
@@ -8,6 +8,7 @@ import MapSection from "./components/MapSection";
 function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [transportation, setTransportation] = useState("no");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,11 +25,12 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await addRSVP(name, phone);
+      await addRSVP(name, phone, transportation === "yes");
       setIsSubmitted(true);
       setIsLoading(false);
       setName("");
       setPhone("");
+      setTransportation("no");
     } catch (error) {
       console.error("RSVP 전송 실패:", error);
       setIsLoading(false);
@@ -56,18 +58,18 @@ function App() {
           <div className="space-y-2 text-gray-200">
             <p className="text-lg font-light">2025년 11월 2일 일요일</p>
             <p className="text-sm">오후 12시</p>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <p className="font-medium text-white">DITO 레스토랑 </p>
               <p className="text-sm text-gray-300">서울특별시 서초구 명달로 94</p>
-            </div>
-            <div className="mt-6">
-              <button
+            </div> */}
+            {/* <div className="mt-6"> */}
+              {/* <button
                 onClick={addToCalendar}
                 className="bg-hot-pink-600 hover:bg-hot-pink-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
               >
                 📅 캘린더에 저장
-              </button>
-            </div>
+              </button> */}
+            {/* </div> */}
           </div>
         </section>
 
@@ -163,10 +165,17 @@ function App() {
               <p className="text-gray-300 text-sm mt-1">소중한 마음 감사드립니다.</p>
             </div>
           ) : (
+            <>
+          <div className="text-center mb-6 space-y-1">
+            <p className="text-gray-300 text-sm">본식은 지정 좌석제로 진행됩니다.</p>
+            <p className="text-gray-300 text-sm">참석하실분들은 반드시 참석 의사를 전달 부탁드립니다.</p>
+            <p className="text-gray-300 text-sm">소중한 시간 내어 함께해 주시는 모든 분들께</p>
+            <p className="text-gray-300 text-sm">진심으로 감사드립니다.</p>
+          </div>
             <form onSubmit={handleRSVP} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">
-                  성함
+                  👤 성함
                 </label>
                 <input
                   type="text"
@@ -181,7 +190,7 @@ function App() {
               
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">
-                  연락처
+                  📞 연락처
                 </label>
                 <input
                   type="tel"
@@ -192,6 +201,41 @@ function App() {
                   disabled={isLoading}
                   required
                 />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  🚗 자차 방문여부
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="transportation"
+                      value="yes"
+                      checked={transportation === "yes"}
+                      onChange={(e) => setTransportation(e.target.value)}
+                      className="accent-hot-pink-500 focus:ring-hot-pink-500 focus:ring-2"
+                      disabled={isLoading}
+                      required
+                    />
+                    <span className="ml-2 text-gray-300 text-sm">네</span>
+                  </label>
+                  
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="transportation"
+                      value="no"
+                      checked={transportation === "no"}
+                      onChange={(e) => setTransportation(e.target.value)}
+                      className="accent-hot-pink-500 focus:ring-hot-pink-500 focus:ring-2"
+                      disabled={isLoading}
+                      required
+                    />
+                    <span className="ml-2 text-gray-300 text-sm">아니오</span>
+                  </label>
+                </div>
               </div>
               
               <button
@@ -228,6 +272,7 @@ function App() {
                 )}
               </button>
             </form>
+            </>
           )}
         </section>
 

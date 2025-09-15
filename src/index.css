@@ -29,3 +29,8 @@
 .focus\:ring-hot-pink-500:focus { 
   --tw-ring-color: #EF7B8E;
 }
+
+/* 라디오 버튼 커스텀 스타일 */
+input[type="radio"] {
+  accent-color: #EF7B8E;
+}

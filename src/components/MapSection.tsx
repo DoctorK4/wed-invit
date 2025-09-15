@@ -55,6 +55,22 @@ function loadNaverMaps(): Promise<any> {
 export default function MapSection({ address }: { address: string }) {
   const mapElRef = useRef<HTMLDivElement | null>(null)
 
+  // Desktop에서 네이버지도 내부가 grab/hand 커서로 바뀌는 문제를 전역 CSS로 무력화
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const STYLE_ID = 'naver-map-cursor-override';
+    if (!document.getElementById(STYLE_ID)) {
+      const style = document.createElement('style');
+      style.id = STYLE_ID;
+      style.textContent = `
+@media (hover: hover) and (pointer: fine) {
+  .naver-map-container, .naver-map-container * { cursor: default !important; }
+}
+`;
+      document.head.appendChild(style);
+    }
+  }, []);
+
   useEffect(() => {
     if (!address || !mapElRef.current) return
 
@@ -62,14 +78,41 @@ export default function MapSection({ address }: { address: string }) {
     let map: any | null = null
     let cancelled = false
 
+    let touchStartHandler: ((e: TouchEvent) => void) | null = null;
+    let touchEndHandler: ((e: TouchEvent) => void) | null = null;
+
     loadNaverMaps()
       .then((naver) => {
         if (cancelled) return
         // 우선 임시 중심(서울 시청)으로 맵 생성 후, 지오코딩 결과로 재중심
         map = new naver.maps.Map(mapElRef.current!, {
           center: new naver.maps.LatLng(37.5665, 126.978),
-          zoom: 14,
+          zoom: 16,
+          // Interaction: one-finger drag disabled by default; pinch-zoom allowed
+          draggable: true,
+          pinchZoom: true,
+          scrollWheel: true,
+          keyboardShortcuts: false,
+          disableDoubleTapZoom: true,
         })
+
+        const mapDomEl: HTMLElement = map.getElement();
+        // 데스크톱에서 손모양/잡기 커서 강제 제거
+        mapDomEl.style.cursor = 'default';
+
+        touchStartHandler = (e: TouchEvent) => {
+          const touches = e.touches ? e.touches.length : 0;
+          map.setOptions('draggable', touches >= 2);
+        };
+
+        touchEndHandler = (e: TouchEvent) => {
+          const touches = e.touches ? e.touches.length : 0;
+          if (touches < 2) map.setOptions('draggable', false);
+        };
+
+        mapDomEl.addEventListener('touchstart', touchStartHandler, { passive: true });
+        mapDomEl.addEventListener('touchend', touchEndHandler);
+        mapDomEl.addEventListener('touchcancel', touchEndHandler);
 
         return waitForGeocoder(naver).then(() => {
           naver.maps.Service.geocode({ query: address }, (status: string, response: any) => {
@@ -100,8 +143,22 @@ export default function MapSection({ address }: { address: string }) {
 
     return () => {
       cancelled = true
+      try {
+        const el = map?.getElement?.();
+        if (el) {
+          if (touchStartHandler) el.removeEventListener('touchstart', touchStartHandler);
+          if (touchEndHandler) {
+            el.removeEventListener('touchend', touchEndHandler);
+            el.removeEventListener('touchcancel', touchEndHandler);
+          }
+        }
+      } catch (error) {
+        console.error('[MapSection] 지도 요소 제거 실패:', error);
+      }
       if (marker) {
-        try { marker.setMap(null) } catch {}
+        try { marker.setMap(null) } catch (error) {
+          console.error('[MapSection] 마커 제거 실패:', error);
+        }
       }
       // Naver Maps는 명시적인 destroy가 없어 DOM만 정리
     }
@@ -110,6 +167,7 @@ export default function MapSection({ address }: { address: string }) {
   return (
     <div
       ref={mapElRef}
+      className="naver-map-container"
       style={{ width: '100%', height: 400, borderRadius: 12, overflow: 'hidden' }}
       aria-label="오시는 길 지도"
     />

@@ -110,7 +110,13 @@ export default function MapSection({ address }: { address: string }) {
   return (
     <div
       ref={mapElRef}
-      style={{ width: '100%', height: 400, borderRadius: 12, overflow: 'hidden' }}
+      style={{ 
+        width: '100%', 
+        height: 400, 
+        borderRadius: 12, 
+        overflow: 'hidden',
+        touchAction: 'pan-x pan-y'
+      }}
       aria-label="오시는 길 지도"
     />
   )

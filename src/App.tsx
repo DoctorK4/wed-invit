@@ -143,7 +143,7 @@ function App() {
                   <img 
                     src="/images/navermap.webp" 
                     alt="네이버지도 아이콘" 
-                    className="w-4 h-4"
+                    className="w-4 h-4 rounded"
                   />
                 </span>
                 네이버지도
@@ -224,7 +224,7 @@ function App() {
                     참석의사 전달하는 중...💌
                   </div>
                 ) : (
-                  "참석 의사 전달하기"
+                  "전달하기"
                 )}
               </button>
             </form>

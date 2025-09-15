@@ -92,10 +92,62 @@ function App() {
         </section>
 
         {/* Wedding Info Section */}
-        <section className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800">
-          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Wedding Day</h2>
+        <section className="text-center mb-8 bg-black rounded-lg py-6 shadow-lg">
+          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Our Wedding Day</h2>
+          <div className="space-y-1 text-gray-200">
+            <p className="text-medium font-light">2025년 11월 2일 일요일</p>
+            <p className="text-medium font-light">오후 12시 | 서초 DITO</p>
+          </div>
+        {/* Greeting Section */}
+        <section className="mt-8 mb-2">
+          <div className="w-full rounded-lg overflow-hidden">
+            <img 
+              src="/images/greeting_edited.jpg" 
+              alt="인사말" 
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </section>
+        </section>
+
+
+        {/* Ellie Letter Section */}
+        <section className="mb-8">
+          <div className="w-full rounded-lg overflow-hidden">
+            <img 
+              src="/images/ellieLetter.jpg" 
+              alt="엘리 편지" 
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </section>
+
+        {/* <Gallery slides={slides} /> */}
+
+        {/* Contact Section */}
+        {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
+          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">연락처</h2>
+          <div className="grid grid-cols-2 gap-6 text-sm">
+            <div>
+              <p className="font-medium text-white mb-2">신랑측</p>
+              <p className="text-gray-300">아버지: 010-0000-0000</p>
+              <p className="text-gray-300">어머니: 010-0000-0000</p>
+              <p className="text-gray-300">신랑: 010-0000-0000</p>
+            </div>
+            <div>
+              <p className="font-medium text-white mb-2">신부측</p>
+              <p className="text-gray-300">아버지: 010-0000-0000</p>
+              <p className="text-gray-300">어머니: 010-0000-0000</p>
+              <p className="text-gray-300">신부: 010-0000-0000</p>
+            </div>
+          </div>
+        </section> */}
+
+                {/* Wedding Info Section */}
+                <section className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800">
+          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Save The Date</h2>
           <div className="space-y-4 text-gray-200">
-            <p className="text-lg font-light">2025년 11월 2일 일요일 | 오후 12시</p>
+            <p className="text-lg font-light">25년 11월 2일 일요일 오후 12시</p>
             
             {/* Divider */}
             <div className="flex justify-center my-6">
@@ -108,6 +160,14 @@ function App() {
                 <p className="text-white font-medium">November 2025</p>
               </div>
               <div className="grid grid-cols-7 gap-2 max-w-xs mx-auto">
+                  {/* Days of week */}
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">SUN</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">MON</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">TUE</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">WED</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">THU</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">FRI</div>
+                  <div className="text-gray-400 text-center py-1 text-xs font-medium">SAT</div>
                   
                   {/* Empty cells for start of month */}
                   <div></div><div></div><div></div><div></div><div></div><div></div>
@@ -145,41 +205,8 @@ function App() {
                   <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">30</div>
                 </div>
               </div>
-            
           </div>
         </section>
-
-        {/* Ellie Letter Section */}
-        <section className="mb-8">
-          <div className="w-full rounded-lg overflow-hidden">
-            <img 
-              src="/images/ellieletter.png" 
-              alt="엘리 편지" 
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </section>
-
-        {/* <Gallery slides={slides} /> */}
-
-        {/* Contact Section */}
-        {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
-          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">연락처</h2>
-          <div className="grid grid-cols-2 gap-6 text-sm">
-            <div>
-              <p className="font-medium text-white mb-2">신랑측</p>
-              <p className="text-gray-300">아버지: 010-0000-0000</p>
-              <p className="text-gray-300">어머니: 010-0000-0000</p>
-              <p className="text-gray-300">신랑: 010-0000-0000</p>
-            </div>
-            <div>
-              <p className="font-medium text-white mb-2">신부측</p>
-              <p className="text-gray-300">아버지: 010-0000-0000</p>
-              <p className="text-gray-300">어머니: 010-0000-0000</p>
-              <p className="text-gray-300">신부: 010-0000-0000</p>
-            </div>
-          </div>
-        </section> */}
 
         {/* Directions Section */}
         <section className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">

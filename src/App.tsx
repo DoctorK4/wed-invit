@@ -94,21 +94,58 @@ function App() {
         {/* Wedding Info Section */}
         <section className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800">
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Wedding Day</h2>
-          <div className="space-y-2 text-gray-200">
-            <p className="text-lg font-light">2025년 11월 2일 일요일</p>
-            <p className="text-sm">오후 12시</p>
-            {/* <div className="mt-4">
-              <p className="font-medium text-white">DITO 레스토랑 </p>
-              <p className="text-sm text-gray-300">서울특별시 서초구 명달로 94</p>
-            </div> */}
-            {/* <div className="mt-6"> */}
-              {/* <button
-                onClick={addToCalendar}
-                className="bg-hot-pink-600 hover:bg-hot-pink-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
-              >
-                📅 캘린더에 저장
-              </button> */}
-            {/* </div> */}
+          <div className="space-y-4 text-gray-200">
+            <p className="text-lg font-light">2025년 11월 2일 일요일 | 오후 12시</p>
+            
+            {/* Divider */}
+            <div className="flex justify-center my-6">
+              <div className="border-t border-gray-700 w-24"></div>
+            </div>
+            
+            {/* Calendar */}
+            <div className="mt-6">
+              <div className="text-center mb-4">
+                <p className="text-white font-medium">November 2025</p>
+              </div>
+              <div className="grid grid-cols-7 gap-2 max-w-xs mx-auto">
+                  
+                  {/* Empty cells for start of month */}
+                  <div></div><div></div><div></div><div></div><div></div><div></div>
+                  
+                  {/* November dates */}
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">1</div>
+                  <div className="bg-hot-pink-500 text-white text-center py-2 w-8 h-8 flex items-center justify-center rounded-full font-bold">2</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">3</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">4</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">5</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">6</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">7</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">8</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">9</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">10</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">11</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">12</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">13</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">14</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">15</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">16</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">17</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">18</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">19</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">20</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">21</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">22</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">23</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">24</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">25</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">26</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">27</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">28</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">29</div>
+                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">30</div>
+                </div>
+              </div>
+            
           </div>
         </section>
 
@@ -251,7 +288,7 @@ function App() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-hot-pink-500 text-white placeholder-gray-400"
-                  placeholder="성함을 입력해주세요"
+                  placeholder=""
                   required
                   disabled={isLoading}
                 />
@@ -266,7 +303,7 @@ function App() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-hot-pink-500 text-white placeholder-gray-400"
-                  placeholder="연락처를 입력해주세요"
+                  placeholder="01000000000"
                   disabled={isLoading}
                   required
                 />

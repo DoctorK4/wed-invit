@@ -82,7 +82,7 @@ function App() {
               playsInline
               preload="auto"
               controls={false}
-              className="w-full h-full object-contain"
+              className="w-full object-contain"
               title="희진 & 동률 결혼식"
             >
               <source src="/images/Our Wedding.mp4" type="video/mp4" />

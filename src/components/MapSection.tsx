@@ -87,7 +87,7 @@ export default function MapSection({ address }: { address: string }) {
         // 우선 임시 중심(서울 시청)으로 맵 생성 후, 지오코딩 결과로 재중심
         map = new naver.maps.Map(mapElRef.current!, {
           center: new naver.maps.LatLng(37.5665, 126.978),
-          zoom: 16,
+          zoom: 14,
           // Interaction: one-finger drag disabled by default; pinch-zoom allowed
           draggable: true,
           pinchZoom: true,

@@ -44,11 +44,18 @@ function App() {
         {/* Main Photo Section */}
         <section className="mb-8">
           <div className="w-full h-[85vh] rounded-lg mb-4 overflow-hidden">
-            <img 
-              src="/images/Our Wedding.gif" 
-              alt="희진 & 동률 결혼식" 
+            <video
+              src="/images/Our Wedding.mp4"
+              poster="/images/Our Wedding.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
               className="w-full h-full object-contain"
-            />
+              title="희진 & 동률 결혼식"
+            >
+              죄송합니다. 브라우저가 영상을 지원하지 않습니다.
+            </video>
           </div>
         </section>
 

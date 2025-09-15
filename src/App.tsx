@@ -1,11 +1,12 @@
 import { addRSVP } from "./api/addRSVP";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { addToCalendar } from "./service/addToCalendar";
 // import Gallery from "./components/Gallery";
 import "yet-another-react-lightbox/styles.css";
 import MapSection from "./components/MapSection";
 
 function App() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
@@ -20,6 +21,30 @@ function App() {
   //   { src: "/images/gallery3.png", alt: "사진 3" },
   //   { src: "/images/gallery4.png", alt: "사진 4" },
   // ];
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    // Ensure muted before attempting autoplay
+    v.muted = true;
+    v.defaultMuted = true;
+    const tryPlay = async () => {
+      try {
+        await v.play();
+      } catch (e) {
+        // Autoplay may still be blocked; ignore silently
+      }
+    };
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      const onLoaded = () => {
+        tryPlay();
+        v.removeEventListener("loadeddata", onLoaded);
+      };
+      v.addEventListener("loadeddata", onLoaded);
+    }
+  }, []);
 
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,15 +70,22 @@ function App() {
         <section className="mb-8">
           <div className="w-full h-[85vh] rounded-lg mb-4 overflow-hidden">
             <video
+              ref={videoRef}
               src="/images/Our Wedding.mp4"
               poster="/images/Our Wedding.jpg"
               autoPlay
               muted
+              // defaultMuted helps Safari/iOS autoplay
+              // @ts-expect-error - property exists on HTMLMediaElement
+              defaultMuted
               loop
               playsInline
+              preload="auto"
+              controls={false}
               className="w-full h-full object-contain"
               title="희진 & 동률 결혼식"
             >
+              <source src="/images/Our Wedding.mp4" type="video/mp4" />
               죄송합니다. 브라우저가 영상을 지원하지 않습니다.
             </video>
           </div>
@@ -174,10 +206,10 @@ function App() {
           ) : (
             <>
           <div className="text-center mb-6 space-y-1">
-            <p className="text-gray-300 text-sm">본식은 지정 좌석제로 진행됩니다.</p>
-            <p className="text-gray-300 text-sm">참석하실분들은 반드시 참석 의사를 전달 부탁드립니다.</p>
-            <p className="text-gray-300 text-sm">소중한 시간 내어 함께해 주시는 모든 분들께</p>
-            <p className="text-gray-300 text-sm">진심으로 감사드립니다.</p>
+            <p className="text-gray-300 text-sm">저희 결혼식은 <strong>스몰 웨딩 - 지정 좌석제</strong>로 진행됩니다</p>
+            <p className="text-gray-300 text-sm">원활한 착석과 식사를 위해 참석 여부를 꼭 사전에 알려주세요</p>
+            {/* <p className="text-gray-300 text-sm">소중한 시간 내어 함께해 주시는 모든 분들께</p>
+            <p className="text-gray-300 text-sm">진심으로 감사드립니다.</p> */}
           </div>
             <form onSubmit={handleRSVP} className="space-y-4">
               <div>

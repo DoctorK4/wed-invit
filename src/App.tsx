@@ -190,6 +190,36 @@ function App() {
                 네이버지도
               </a>
             </div>
+            
+            {/* Transportation Info */}
+            <div className="mt-6 space-y-4">
+              <div className="bg-gray-800/50 rounded-lg p-4">
+                <h3 className="text-white font-medium text-sm mb-3 flex items-center">
+                  🚇 대중교통 이용
+                </h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚌 버스</p>
+                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 5번 출구에서 서초13 탑승 후 
+                     <br/> 더미켈란아파트 정거장에서 하차</p>
+                  </div>
+                  <div>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚶 도보</p>
+                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 4번 출구에서 도보 10분</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-800/50 rounded-lg p-4">
+                <h3 className="text-white font-medium text-sm mb-2 flex items-center">
+                  🚗 자차 이용
+                </h3>
+                <div className="space-y-1">
+                  <p className="text-gray-300 text-sm">레스토랑 건물 지하 주차장 이용</p>
+                  <p className="text-gray-300 text-xs text-gray-400">※ 주차 공간이 한정되어 있으니 가급적 대중교통 이용 부탁드립니다</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

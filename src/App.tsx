@@ -485,7 +485,7 @@ function App() {
           whileInView={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
+          viewport={{ once: true, margin: "-50px", amount: 0.2 }}
           className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>

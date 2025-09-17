@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 interface GalleryProps {
   slides: Array<{ src: string; alt: string }>;
@@ -34,6 +35,8 @@ export default function Gallery({ slides }: GalleryProps) {
         close={() => setLightboxOpen(false)}
         index={lightboxIndex}
         slides={slides}
+        plugins={[Zoom]}
+        zoom={{ scrollToZoom: true, maxZoomPixelRatio: 3 }}
       />
     </section>
   );

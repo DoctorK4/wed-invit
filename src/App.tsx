@@ -180,7 +180,7 @@ function App() {
           >
             <div className="text-6xl mb-4">🎵</div>
             <h3 className="text-white text-xl font-medium mb-2">음악과 함께 하실까요?</h3>
-            <p className="text-gray-300 text-sm mb-6">결혼 청첩장에 어울리는 배경음악을 준비했습니다</p>
+            <p className="text-gray-300 text-sm mb-6"></p>
             <div className="flex gap-3 justify-center">
               <motion.button
                 onClick={startMusic}

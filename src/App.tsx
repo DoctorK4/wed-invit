@@ -34,26 +34,45 @@ function App() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // Ensure muted before attempting autoplay
     v.muted = true;
     v.defaultMuted = true;
+
+    if (showMusicPrompt) {
+      v.pause();
+      return;
+    }
+
+    let isCancelled = false;
+
     const tryPlay = async () => {
+      if (isCancelled) return;
       try {
         await v.play();
       } catch (e) {
-        // Autoplay may still be blocked; ignore silently
+        // Video playback might still be blocked; ignore
       }
     };
+
     if (v.readyState >= 2) {
       tryPlay();
-    } else {
-      const onLoaded = () => {
-        tryPlay();
-        v.removeEventListener("loadeddata", onLoaded);
+      return () => {
+        isCancelled = true;
       };
-      v.addEventListener("loadeddata", onLoaded);
     }
-  }, []);
+
+    const onLoaded = () => {
+      if (isCancelled) return;
+      tryPlay();
+      v.removeEventListener("loadeddata", onLoaded);
+    };
+
+    v.addEventListener("loadeddata", onLoaded);
+
+    return () => {
+      isCancelled = true;
+      v.removeEventListener("loadeddata", onLoaded);
+    };
+  }, [showMusicPrompt]);
 
   useEffect(() => {
     const a = audioRef.current;
@@ -266,7 +285,6 @@ function App() {
               ref={videoRef}
               src="/images/Our Wedding.mp4"
               poster="/images/Our Wedding.jpg"
-              autoPlay
               muted
               loop
               playsInline

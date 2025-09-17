@@ -216,7 +216,7 @@ function App() {
           viewport={{ once: false, margin: "-100px", amount: 0.2 }}
           className="mb-8"
         >
-          <div className="w-full h-[85vh] rounded-lg mb-4 overflow-hidden">
+          <div className="w-full rounded-lg mb-4 overflow-hidden">
             <video
               ref={videoRef}
               src="/images/Our Wedding.mp4"
@@ -227,7 +227,7 @@ function App() {
               playsInline
               preload="auto"
               controls={false}
-              className="w-full object-contain"
+              className="w-full h-auto object-contain"
               title="희진 & 동률 결혼식"
             >
               <source src="/images/Our Wedding.mp4" type="video/mp4" />

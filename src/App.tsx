@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const scrollLockRef = useRef(0);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
@@ -16,6 +17,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [showMusicPrompt, setShowMusicPrompt] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
@@ -58,6 +63,46 @@ function App() {
     a.volume = 0.3;
     a.muted = true;
   }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const { body } = document;
+    if (!body) return;
+
+    if (showMusicPrompt) {
+      scrollLockRef.current = window.scrollY || window.pageYOffset;
+      body.style.position = "fixed";
+      body.style.top = `-${scrollLockRef.current}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
+      body.style.overflow = "hidden";
+    } else {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      if (scrollLockRef.current) {
+        window.scrollTo({ top: scrollLockRef.current, behavior: "auto" });
+        scrollLockRef.current = 0;
+      }
+    }
+
+    return () => {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      if (scrollLockRef.current) {
+        window.scrollTo({ top: scrollLockRef.current, behavior: "auto" });
+        scrollLockRef.current = 0;
+      }
+    };
+  }, [showMusicPrompt]);
 
   const toggleMute = async () => {
     const a = audioRef.current;

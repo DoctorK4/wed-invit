@@ -10,7 +10,7 @@ export default function Gallery({ slides }: GalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
   return (
-    <section className="mb-8">
+    <section className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
       <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">Gallery</h2>
       <div className="grid grid-cols-2 gap-3">
         {slides.map((s, i) => (

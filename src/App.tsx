@@ -15,7 +15,7 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [showMusicPrompt, setShowMusicPrompt] = useState(true);
 
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
@@ -56,44 +56,8 @@ function App() {
 
     a.loop = true;
     a.volume = 0.3;
-
-    // Try to play immediately (will likely fail due to browser policy)
-    const tryAutoplay = async () => {
-      try {
-        await a.play();
-        setIsMuted(false);
-        setHasUserInteracted(true);
-      } catch (e) {
-        console.log("Autoplay blocked, waiting for user interaction");
-      }
-    };
-
-    const handleUserInteraction = async () => {
-      setHasUserInteracted(true);
-      if (!isMuted) {
-        try {
-          await a.play();
-        } catch (e) {
-          console.log("Audio play failed");
-        }
-      }
-    };
-
-    // Try autoplay first
-    tryAutoplay();
-
-    // Listen for any user interaction to enable audio
-    const events = ['click', 'touchstart', 'scroll', 'keydown'];
-    events.forEach(event => {
-      document.addEventListener(event, handleUserInteraction, { once: true });
-    });
-
-    return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, handleUserInteraction);
-      });
-    };
-  }, [isMuted]);
+    a.muted = true;
+  }, []);
 
   const toggleMute = async () => {
     const a = audioRef.current;
@@ -101,16 +65,31 @@ function App() {
 
     if (isMuted) {
       setIsMuted(false);
-      if (hasUserInteracted) {
-        try {
-          await a.play();
-        } catch (e) {
-          console.log("Audio play failed");
-        }
+      setShowMusicPrompt(false);
+      a.muted = false;
+      try {
+        await a.play();
+      } catch (e) {
+        console.log("Audio play failed");
       }
     } else {
       setIsMuted(true);
+      a.muted = true;
       a.pause();
+    }
+  };
+
+  const startMusic = async () => {
+    const a = audioRef.current;
+    if (!a) return;
+
+    setIsMuted(false);
+    setShowMusicPrompt(false);
+    a.muted = false;
+    try {
+      await a.play();
+    } catch (e) {
+      console.log("Audio play failed");
     }
   };
 
@@ -135,19 +114,58 @@ function App() {
       {/* Background Audio */}
       <audio
         ref={audioRef}
-        src="/tokyo87.mp3"
+        src="/images/tokyo87.mp3"
         preload="auto"
         muted={isMuted}
       />
 
+      {/* Music Prompt */}
+      {showMusicPrompt && (
+        <motion.div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="bg-gray-900/90 rounded-2xl p-8 max-w-sm text-center border border-gray-700 shadow-xl"
+            initial={{ scale: 0.9, y: 50 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="text-6xl mb-4">🎵</div>
+            <h3 className="text-white text-xl font-medium mb-2">음악과 함께 하실까요?</h3>
+            <p className="text-gray-300 text-sm mb-6">결혼 청첩장에 어울리는 배경음악을 준비했습니다</p>
+            <div className="flex gap-3 justify-center">
+              <motion.button
+                onClick={startMusic}
+                className="bg-hot-pink-600 hover:bg-hot-pink-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                🎵 음악 켜기
+              </motion.button>
+              <motion.button
+                onClick={() => setShowMusicPrompt(false)}
+                className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                건너뛰기
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
       {/* Mute Button */}
       <motion.button
         onClick={toggleMute}
-        className="fixed top-4 right-4 z-50 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300"
+        className="fixed top-4 right-4 z-40 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: showMusicPrompt ? 0 : 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
         {isMuted ? (
@@ -241,7 +259,7 @@ function App() {
           exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: false, margin: "-50px", amount: 0.3 }}
-          className="mt-8 mb-2"
+          className="mt-8 mb-8"
         >
           <div className="w-full rounded-lg overflow-hidden">
             <img

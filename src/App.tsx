@@ -8,19 +8,22 @@ import { motion } from "framer-motion";
 
 function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
   const slides = [
     { src: "/images/gallery1.png", alt: "사진 1" },
-    { src: "/images/gallery2.png", alt: "사진 2" },
-    { src: "/images/gallery3.png", alt: "사진 3" },
-    { src: "/images/gallery4.png", alt: "사진 4" },
+    { src: "/images/gallery2.jpeg", alt: "사진 2" },
+    { src: "/images/gallery3.jpeg", alt: "사진 3" },
+    { src: "/images/gallery4.jpeg", alt: "사진 4" },
   ];
 
   useEffect(() => {
@@ -47,6 +50,70 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+
+    a.loop = true;
+    a.volume = 0.3;
+
+    // Try to play immediately (will likely fail due to browser policy)
+    const tryAutoplay = async () => {
+      try {
+        await a.play();
+        setIsMuted(false);
+        setHasUserInteracted(true);
+      } catch (e) {
+        console.log("Autoplay blocked, waiting for user interaction");
+      }
+    };
+
+    const handleUserInteraction = async () => {
+      setHasUserInteracted(true);
+      if (!isMuted) {
+        try {
+          await a.play();
+        } catch (e) {
+          console.log("Audio play failed");
+        }
+      }
+    };
+
+    // Try autoplay first
+    tryAutoplay();
+
+    // Listen for any user interaction to enable audio
+    const events = ['click', 'touchstart', 'scroll', 'keydown'];
+    events.forEach(event => {
+      document.addEventListener(event, handleUserInteraction, { once: true });
+    });
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, handleUserInteraction);
+      });
+    };
+  }, [isMuted]);
+
+  const toggleMute = async () => {
+    const a = audioRef.current;
+    if (!a) return;
+
+    if (isMuted) {
+      setIsMuted(false);
+      if (hasUserInteracted) {
+        try {
+          await a.play();
+        } catch (e) {
+          console.log("Audio play failed");
+        }
+      }
+    } else {
+      setIsMuted(true);
+      a.pause();
+    }
+  };
+
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -65,6 +132,61 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black">
+      {/* Background Audio */}
+      <audio
+        ref={audioRef}
+        src="/tokyo87.mp3"
+        preload="auto"
+        muted={isMuted}
+      />
+
+      {/* Mute Button */}
+      <motion.button
+        onClick={toggleMute}
+        className="fixed top-4 right-4 z-50 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        {isMuted ? (
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
+            />
+          </svg>
+        ) : (
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
+            />
+          </svg>
+        )}
+      </motion.button>
+
       <div className="max-w-md mx-auto px-0">
 
         {/* Main Photo Section */}

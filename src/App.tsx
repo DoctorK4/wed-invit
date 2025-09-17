@@ -75,9 +75,6 @@ function App() {
               poster="/images/Our Wedding.jpg"
               autoPlay
               muted
-              // defaultMuted helps Safari/iOS autoplay
-              // @ts-expect-error - property exists on HTMLMediaElement
-              defaultMuted
               loop
               playsInline
               preload="auto"
@@ -114,9 +111,20 @@ function App() {
         {/* Ellie Letter Section */}
         <section className="mb-8">
           <div className="w-full rounded-lg overflow-hidden">
-            <img 
-              src="/images/ellieLetter.jpg" 
-              alt="엘리 편지" 
+            <img
+              src="/images/ellieLetter.jpg"
+              alt="엘리 편지"
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </section>
+
+        {/* Dr Letter Section */}
+        <section className="mb-8">
+          <div className="w-full rounded-lg overflow-hidden">
+            <img
+              src="/images/drLetter.jpg"
+              alt="동률 편지"
               className="w-full h-auto object-contain"
             />
           </div>

@@ -157,6 +157,13 @@ function App() {
     }
   };
 
+  const resetRSVP = () => {
+    setIsSubmitted(false);
+    setName("");
+    setPhone("");
+    setTransportation("no");
+  };
+
   const handleRSVP = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -574,6 +581,13 @@ function App() {
               <div className="text-hot-pink-500 text-lg mb-2">💖</div>
               <p className="text-hot-pink-400 font-medium">참석 의사가 전달되었습니다!</p>
               <p className="text-gray-300 text-sm mt-1">소중한 마음 감사드립니다.</p>
+              <button
+                type="button"
+                onClick={resetRSVP}
+                className="mt-4 bg-hot-pink-600 hover:bg-hot-pink-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
+              >
+                추가 등록하기
+              </button>
             </div>
           ) : (
             <>

@@ -1,7 +1,7 @@
 import { addRSVP } from "./api/addRSVP";
 import { useEffect, useRef, useState } from "react";
 // import { addToCalendar } from "./service/addToCalendar";
-// import Gallery from "./components/Gallery";
+import Gallery from "./components/Gallery";
 import "yet-another-react-lightbox/styles.css";
 import MapSection from "./components/MapSection";
 import { motion } from "framer-motion";
@@ -16,12 +16,12 @@ function App() {
 
 
   // 라이트박스에 사용할 슬라이드 데이터 (이미지 경로는 프로젝트에 맞게 교체하세요)
-  // const slides = [
-  //   { src: "/images/gallery1.png", alt: "사진 1" },
-  //   { src: "/images/gallery2.png", alt: "사진 2" },
-  //   { src: "/images/gallery3.png", alt: "사진 3" },
-  //   { src: "/images/gallery4.png", alt: "사진 4" },
-  // ];
+  const slides = [
+    { src: "/images/gallery1.png", alt: "사진 1" },
+    { src: "/images/gallery2.png", alt: "사진 2" },
+    { src: "/images/gallery3.png", alt: "사진 3" },
+    { src: "/images/gallery4.png", alt: "사진 4" },
+  ];
 
   useEffect(() => {
     const v = videoRef.current;
@@ -71,8 +71,9 @@ function App() {
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px", amount: 0.2 }}
           className="mb-8"
         >
           <div className="w-full h-[85vh] rounded-lg mb-4 overflow-hidden">
@@ -99,8 +100,9 @@ function App() {
         <motion.section
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
           className="text-center mb-8 bg-black rounded-lg py-6 shadow-lg"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Our Wedding Day</h2>
@@ -108,12 +110,15 @@ function App() {
             <p className="text-medium font-light">2025년 11월 2일 일요일</p>
             <p className="text-medium font-light">오후 12시 | 서초 DITO</p>
           </div>
+        </motion.section>
+
         {/* Greeting Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 30 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
           className="mt-8 mb-2"
         >
           <div className="w-full rounded-lg overflow-hidden">
@@ -124,15 +129,16 @@ function App() {
             />
           </div>
         </motion.section>
-        </motion.section>
+
 
 
         {/* Ellie Letter Section */}
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
           className="mb-8"
         >
           <div className="w-full rounded-lg overflow-hidden">
@@ -148,8 +154,9 @@ function App() {
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
           className="mb-8"
         >
           <div className="w-full rounded-lg overflow-hidden">
@@ -161,7 +168,15 @@ function App() {
           </div>
         </motion.section>
 
-        {/* <Gallery slides={slides} /> */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
+        >
+          <Gallery slides={slides} />
+        </motion.div>
 
         {/* Contact Section */}
         {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
@@ -186,8 +201,9 @@ function App() {
                 <motion.section
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 40 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: false, margin: "-50px", amount: 0.3 }}
                   className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800"
                 >
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Save The Date</h2>
@@ -257,8 +273,9 @@ function App() {
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
           className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>
@@ -342,8 +359,9 @@ function App() {
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
           className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">참석 의사 전달</h2>

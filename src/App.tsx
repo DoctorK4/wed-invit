@@ -10,6 +10,7 @@ function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const scrollLockRef = useRef(0);
+  const hasRequestedVideoPreload = useRef(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
@@ -37,10 +38,23 @@ function App() {
     v.muted = true;
     v.defaultMuted = true;
 
+
     if (showMusicPrompt) {
+      if (!hasRequestedVideoPreload.current) {
+        hasRequestedVideoPreload.current = true;
+        v.preload = "auto";
+        // Force the browser to begin buffering without starting playback
+        try {
+          v.load();
+        } catch (error) {
+          console.warn("Video preloading failed", error);
+        }
+      }
       v.pause();
       return;
     }
+
+    hasRequestedVideoPreload.current = false;
 
     let isCancelled = false;
 

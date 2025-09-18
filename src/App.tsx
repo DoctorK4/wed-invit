@@ -298,7 +298,7 @@ function App() {
           whileInView={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: false, margin: "-100px", amount: 0.2 }}
+          viewport={{ once: true, margin: "-100px", amount: 0.2 }}
           className="mb-8"
         >
           <div className="w-full rounded-lg mb-4 overflow-hidden">

@@ -607,9 +607,8 @@ function App() {
             <>
           <div className="text-center mb-6 space-y-1">
             <p className="text-gray-300 text-sm">저희 결혼식은 <strong>스몰 웨딩 - 지정 좌석제</strong>로 진행됩니다</p>
-            <p className="text-gray-300 text-sm">원활한 착석과 식사를 위해 참석 여부를 꼭 사전에 알려주세요</p>
-            {/* <p className="text-gray-300 text-sm">소중한 시간 내어 함께해 주시는 모든 분들께</p>
-            <p className="text-gray-300 text-sm">진심으로 감사드립니다.</p> */}
+            <p className="text-gray-300 text-sm">원활한 착석과 식사를 위해 </p>
+            <p className="text-gray-300 text-sm">참석 여부를 꼭 사전에 알려주세요</p>
           </div>
             <form onSubmit={handleRSVP} className="space-y-4">
               <div>

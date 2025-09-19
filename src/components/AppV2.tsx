@@ -498,92 +498,6 @@ function AppV2() {
           </div>
         </motion.section>
 
-        {/* Directions Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px", amount: 0.2 }}
-          className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
-        >
-          <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>
-          
-          <div className="mb-4">
-            <p className="text-center text-white font-medium mb-2">DITO 레스토랑</p>
-            <p className="text-center text-gray-300 text-sm mb-4">서울특별시 서초구 명달로 94</p>
-            
-            {/* Naver Map */}
-            <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
-              <MapSection address="서울특별시 서초구 명달로 94"/>
-            </div>
-            
-            {/* Map Links */}
-            <div className="flex justify-center gap-4">
-              <a
-                href="https://map.kakao.com/?urlX=500937.99999999907&urlY=1107307.9999999981&urlLevel=3&itemId=1706770960&q=%EB%94%94%ED%86%A0%20%EC%84%9C%EC%B4%88%EC%A0%90&srcid=1706770960&map_type=TYPE_MAP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
-              >
-                <span>
-                  <img 
-                    src="/images/kakao_map.png" 
-                    alt="카카오맵 아이콘" 
-                    className="w-4 h-4"
-                  />
-                </span>
-                카카오맵
-              </a>
-              <a
-                href="https://naver.me/x67yKre8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
-              >
-                <span>
-                  <img 
-                    src="/images/navermap.webp" 
-                    alt="네이버지도 아이콘" 
-                    className="w-4 h-4 rounded"
-                  />
-                </span>
-                네이버지도
-              </a>
-            </div>
-            
-            {/* Transportation Info */}
-            <div className="mt-6 space-y-4">
-              <div className="bg-gray-800/50 rounded-lg p-4">
-                <h3 className="text-white font-medium text-sm mb-3 flex items-center">
-                  🚇 대중교통 이용
-                </h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚌 버스</p>
-                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 5번 출구에서 서초13 탑승 후 
-                     <br/> 더미켈란아파트 정거장에서 하차</p>
-                  </div>
-                  <div>
-                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚶 도보</p>
-                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 4번 출구에서 도보 10분</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-800/50 rounded-lg p-4">
-                <h3 className="text-white font-medium text-sm mb-2 flex items-center">
-                  🚗 자차 이용
-                </h3>
-                <div className="space-y-1">
-                  <p className="text-gray-300 text-sm">레스토랑 건물 지하 주차장 이용</p>
-                  <p className="text-gray-300 text-xs text-gray-400">※ 주차 공간이 한정되어 있으니 가급적 대중교통 이용 부탁드립니다</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
         {/* RSVP Section */}
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
@@ -717,6 +631,92 @@ function AppV2() {
             </form>
             </>
           )}
+        </motion.section>
+
+        {/* Directions Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-50px", amount: 0.2 }}
+          className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
+        >
+          <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>
+          
+          <div className="mb-4">
+            <p className="text-center text-white font-medium mb-2">DITO 레스토랑</p>
+            <p className="text-center text-gray-300 text-sm mb-4">서울특별시 서초구 명달로 94</p>
+            
+            {/* Naver Map */}
+            <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
+              <MapSection address="서울특별시 서초구 명달로 94"/>
+            </div>
+            
+            {/* Map Links */}
+            <div className="flex justify-center gap-4">
+              <a
+                href="https://map.kakao.com/?urlX=500937.99999999907&urlY=1107307.9999999981&urlLevel=3&itemId=1706770960&q=%EB%94%94%ED%86%A0%20%EC%84%9C%EC%B4%88%EC%A0%90&srcid=1706770960&map_type=TYPE_MAP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
+              >
+                <span>
+                  <img 
+                    src="/images/kakao_map.png" 
+                    alt="카카오맵 아이콘" 
+                    className="w-4 h-4"
+                  />
+                </span>
+                카카오맵
+              </a>
+              <a
+                href="https://naver.me/x67yKre8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-sm"
+              >
+                <span>
+                  <img 
+                    src="/images/navermap.webp" 
+                    alt="네이버지도 아이콘" 
+                    className="w-4 h-4 rounded"
+                  />
+                </span>
+                네이버지도
+              </a>
+            </div>
+            
+            {/* Transportation Info */}
+            <div className="mt-6 space-y-4">
+              <div className="bg-gray-800/50 rounded-lg p-4">
+                <h3 className="text-white font-medium text-sm mb-3 flex items-center">
+                  🚇 대중교통 이용
+                </h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚌 버스</p>
+                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 5번 출구에서 서초13 탑승 후 
+                     <br/> 더미켈란아파트 정거장에서 하차</p>
+                  </div>
+                  <div>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚶 도보</p>
+                    <p className="text-gray-300 text-sm">지하철 2호선 서초역 4번 출구에서 도보 10분</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-800/50 rounded-lg p-4">
+                <h3 className="text-white font-medium text-sm mb-2 flex items-center">
+                  🚗 자차 이용
+                </h3>
+                <div className="space-y-1">
+                  <p className="text-gray-300 text-sm">레스토랑 건물 지하 주차장 이용</p>
+                  <p className="text-gray-300 text-xs text-gray-400">※ 주차 공간이 한정되어 있으니 가급적 대중교통 이용 부탁드립니다</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.section>
 
         {/* Footer */}

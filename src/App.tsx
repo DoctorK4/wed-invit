@@ -438,85 +438,8 @@ function App() {
           </div>
         </section> */}
 
-                {/* Wedding Info Section */}
-                <motion.section
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 40 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  viewport={{ once: false, margin: "-50px", amount: 0.3 }}
-                  className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800"
-                >
-          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Save The Date</h2>
-          <div className="space-y-4 text-gray-200">
-            <p className="text-lg font-light">25년 11월 2일 일요일 오후 12시</p>
-            
-            {/* Divider */}
-            <div className="flex justify-center my-6">
-              <div className="border-t border-gray-700 w-24"></div>
-            </div>
-            
-            {/* Calendar */}
-            <div className="mt-6">
-              <div className="text-center mb-4">
-                <p className="text-white font-medium">November 2025</p>
-              </div>
-              <div className="grid grid-cols-7 gap-2 max-w-xs mx-auto">
-                  {/* Days of week */}
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">SUN</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">MON</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">TUE</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">WED</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">THU</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">FRI</div>
-                  <div className="text-gray-400 text-center py-1 text-xs font-medium">SAT</div>
-                  
-                  {/* Empty cells for start of month */}
-                  <div></div><div></div><div></div><div></div><div></div><div></div>
-                  
-                  {/* November dates */}
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">1</div>
-                  <div className="bg-hot-pink-500 text-white text-center py-2 w-8 h-8 flex items-center justify-center rounded-full font-bold">2</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">3</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">4</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">5</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">6</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">7</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">8</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">9</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">10</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">11</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">12</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">13</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">14</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">15</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">16</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">17</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">18</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">19</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">20</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">21</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">22</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">23</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">24</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">25</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">26</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">27</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">28</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">29</div>
-                  <div className="text-white text-center py-2 w-8 h-8 flex items-center justify-center">30</div>
-                </div>
-              </div>
-          </div>
-        </motion.section>
-
          {/* RSVP Section */}
-         <motion.section
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
+         <section
           className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 mb-8"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">참석 의사 전달</h2>
@@ -643,24 +566,19 @@ function App() {
             </form>
             </>
           )}
-        </motion.section>
+        </section>
 
 
         {/* Directions Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px", amount: 0.2 }}
+        <section
           className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">오시는 길</h2>
           
           <div className="mb-4">
-            <p className="text-center text-white font-medium mb-2">DITO 레스토랑</p>
-            <p className="text-center text-gray-300 text-sm mb-4">서울특별시 서초구 명달로 94</p>
-            
+            <p className="text-center text-white font-medium mb-2">DITO</p>
+            <p className="text-center text-gray-300 text-sm mb-4">서울특별시 서초구 명달로 94<br/>(주)삼성출판사 사옥 1층</p>
+            <p className="text-center text-gray-300 text-sm mb-4"></p>
             {/* Naver Map */}
             <div className="w-full h-64 mb-4 rounded-lg overflow-hidden">
               <MapSection address="서울특별시 서초구 명달로 94"/>
@@ -704,16 +622,16 @@ function App() {
             <div className="mt-6 space-y-4">
               <div className="bg-gray-800/50 rounded-lg p-4">
                 <h3 className="text-white font-medium text-sm mb-3 flex items-center">
-                  🚇 대중교통 이용
+                🚶 대중교통 이용
                 </h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚌 버스</p>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚌 &nbsp;버스</p>
                     <p className="text-gray-300 text-sm">지하철 2호선 서초역 5번 출구에서 서초13 탑승 후 
                      <br/> 더미켈란아파트 정거장에서 하차</p>
                   </div>
                   <div>
-                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚶 도보</p>
+                    <p className="text-hot-pink-400 text-xs font-medium mb-1">🚇 &nbsp;지하철</p>
                     <p className="text-gray-300 text-sm">지하철 2호선 서초역 4번 출구에서 도보 10분</p>
                   </div>
                 </div>
@@ -730,7 +648,7 @@ function App() {
               </div>
             </div>
           </div>
-        </motion.section>
+        </section>
 
        
         {/* Footer */}

@@ -435,6 +435,25 @@ function AppV2() {
             <p className="text-medium font-light">2025년 11월 2일 일요일</p>
             <p className="text-medium font-light">오후 12시 | 서초 DITO</p>
           </div>
+
+          <div className="mt-6 rounded-lg px-6 py-5">
+            <div className="space-y-3 text-sm text-gray-200 text-center sm:text-left">
+              <div className="space-y-3 sm:space-y-0 sm:grid sm:grid-cols-[max-content_minmax(0,1fr)] sm:gap-x-6 sm:gap-y-4 sm:items-center sm:justify-center sm:w-fit sm:mx-auto">
+                <span className="block sm:text-right">
+                  <span className="text-base font-medium text-white whitespace-nowrap">김종선 · 박종수</span>
+                  <span className="ml-1 text-sm text-gray-400">의 아들</span>
+                </span>
+                <span className="block text-lg font-semibold text-white sm:text-left whitespace-nowrap">동률</span>
+                <div className="block h-px w-12 bg-gray-700 mx-auto sm:hidden" />
+                <div className="hidden sm:block sm:col-span-2 sm:h-px sm:w-12 sm:bg-gray-700 sm:justify-self-center" />
+                <span className="block sm:text-right">
+                  <span className="text-base font-medium text-white whitespace-nowrap">서백삼 · 김기현</span>
+                  <span className="ml-1 text-sm text-gray-400">의 딸&nbsp;&nbsp;&nbsp;</span>
+                </span>
+                <span className="block text-lg font-semibold text-white sm:text-left whitespace-nowrap">희진</span>
+              </div>
+            </div>
+          </div>
         </motion.section>
 
         {/* Greeting Section */}
@@ -722,9 +741,6 @@ function AppV2() {
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-2">마음 전하실 곳</h2>
           <p className="text-gray-400 text-sm text-center mb-6">
             멀리서 축하의 마음을 전하고 싶으신 분들을 위해 <br/>계좌번호를 안내드립니다.
-          </p>
-          <p className="text-gray-400 text-sm text-center mb-6">
-          소중한 축하를 보내주셔서 감사드리며, <br/>따뜻한 마음에 깊이 감사드립니다.
           </p>
           <div className="space-y-4">
             {bankAccounts.map((group) => {

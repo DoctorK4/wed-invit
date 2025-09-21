@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import Gallery from "./Gallery";
 import "yet-another-react-lightbox/styles.css";
 import MapSection from "./MapSection";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function AppV2() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const scrollLockRef = useRef(0);
   const hasRequestedVideoPreload = useRef(false);
+  const copyTimeoutRef = useRef<number | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
@@ -18,6 +19,8 @@ function AppV2() {
   const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [showMusicPrompt, setShowMusicPrompt] = useState(true);
+  const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,6 +33,44 @@ function AppV2() {
     { src: "/images/gallery2.jpeg", alt: "사진 2" },
     { src: "/images/gallery3.jpeg", alt: "사진 3" },
     { src: "/images/gallery4.jpeg", alt: "사진 4" },
+  ];
+
+  const bankAccounts = [
+    {
+      id: "groom",
+      label: "신랑측",
+      description: "",
+      accounts: [
+        {
+          id: "groom-mother",
+          relation: "신랑 어머니",
+          bank: "농협",
+          account: "3020289902891",
+          holder: "박종수",
+        },
+      ],
+    },
+    {
+      id: "bride",
+      label: "신부측",
+      description: "",
+      accounts: [
+        {
+          id: "bride-father",
+          relation: "신부 아버지",
+          bank: "농협",
+          account: "302-0672-9494-21",
+          holder: "서백삼",
+        },
+        {
+          id: "bride-mother",
+          relation: "신부 어머니",
+          bank: "농협",
+          account: "211067-56-086631",
+          holder: "김기현",
+        },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -137,6 +178,15 @@ function AppV2() {
     };
   }, [showMusicPrompt]);
 
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+        copyTimeoutRef.current = null;
+      }
+    };
+  }, []);
+
   const toggleMute = async () => {
     const a = audioRef.current;
     if (!a) return;
@@ -192,6 +242,57 @@ function AppV2() {
       console.error("RSVP 전송 실패:", error);
       setIsLoading(false);
     }
+  };
+
+  const setCopiedState = (accountId: string) => {
+    setCopiedAccount(accountId);
+    if (copyTimeoutRef.current) {
+      window.clearTimeout(copyTimeoutRef.current);
+    }
+    copyTimeoutRef.current = window.setTimeout(() => {
+      setCopiedAccount(null);
+      copyTimeoutRef.current = null;
+    }, 2000);
+  };
+
+  const copyAccount = async (accountId: string, value: string) => {
+    const textToCopy = value.trim();
+    if (!textToCopy) return;
+
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(textToCopy);
+        setCopiedState(accountId);
+        return;
+      }
+    } catch (error) {
+      // Clipboard API not available; fall back to execCommand
+    }
+
+    if (typeof document === "undefined") return;
+
+    const textarea = document.createElement("textarea");
+    textarea.value = textToCopy;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.focus({ preventScroll: true });
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+      setCopiedState(accountId);
+    } catch (error) {
+      console.error("계좌번호 복사 실패", error);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  };
+
+  const toggleAccordion = (accordionId: string) => {
+    setOpenAccordion((prev) => (prev === accordionId ? null : accordionId));
   };
 
   return (
@@ -291,11 +392,6 @@ function AppV2() {
       </motion.button>
 
       <div className="max-w-md mx-auto px-0">
-
-        {/* V2 Banner */}
-        <div className="bg-blue-600 text-white text-center py-2 mb-4">
-          <p className="text-sm font-medium">🎉 Version 2.0</p>
-        </div>
 
         {/* Main Photo Section */}
         <motion.section
@@ -407,34 +503,15 @@ function AppV2() {
           <Gallery slides={slides} />
         </motion.div>
 
-        {/* Contact Section */}
-        {/* <section className="text-center mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800">
-          <h2 className="text-xl font-medium text-hot-pink-500 mb-4">연락처</h2>
-          <div className="grid grid-cols-2 gap-6 text-sm">
-            <div>
-              <p className="font-medium text-white mb-2">신랑측</p>
-              <p className="text-gray-300">아버지: 010-0000-0000</p>
-              <p className="text-gray-300">어머니: 010-0000-0000</p>
-              <p className="text-gray-300">신랑: 010-0000-0000</p>
-            </div>
-            <div>
-              <p className="font-medium text-white mb-2">신부측</p>
-              <p className="text-gray-300">아버지: 010-0000-0000</p>
-              <p className="text-gray-300">어머니: 010-0000-0000</p>
-              <p className="text-gray-300">신부: 010-0000-0000</p>
-            </div>
-          </div>
-        </section> */}
-
-                {/* Wedding Info Section */}
-                <motion.section
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 40 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  viewport={{ once: false, margin: "-50px", amount: 0.3 }}
-                  className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800"
-                >
+        {/* Wedding Info Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
+          className="text-center mb-8 bg-gray-900/80 rounded-lg py-6 shadow-lg border border-gray-800"
+        >
           <h2 className="text-xl font-medium text-hot-pink-500 mb-4">Save The Date</h2>
           <div className="space-y-4 text-gray-200">
             <p className="text-lg font-light">25년 11월 2일 일요일 오후 12시</p>
@@ -631,6 +708,146 @@ function AppV2() {
             </form>
             </>
           )}
+        </motion.section>
+
+        {/* Appreciation Section */}
+        <motion.section
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.3 }}
+          className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 mb-8"
+        >
+          <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-2">마음 전하실 곳</h2>
+          <p className="text-gray-400 text-sm text-center mb-6">
+            멀리서 축하의 마음을 전하고 싶으신 분들을 위해 <br/>계좌번호를 안내드립니다.
+          </p>
+          <p className="text-gray-400 text-sm text-center mb-6">
+          소중한 축하를 보내주셔서 감사드리며, <br/>따뜻한 마음에 깊이 감사드립니다.
+          </p>
+          <div className="space-y-4">
+            {bankAccounts.map((group) => {
+              const isOpen = openAccordion === group.id;
+              return (
+                <div
+                  key={group.id}
+                  className="rounded-xl border border-gray-700/60 bg-gray-800/60 shadow-inner overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleAccordion(group.id)}
+                    className="w-full px-4 py-4 flex items-center justify-between gap-4 text-left hover:bg-gray-800 transition"
+                    aria-expanded={isOpen}
+                  >
+                    <div>
+                      <p className="text-sm font-semibold text-white">{group.label}</p>
+                      {group.description && (
+                        <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                          {group.description}
+                        </p>
+                      )}
+                    </div>
+                    <motion.span
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-700/70 text-hot-pink-400"
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="h-4 w-4"
+                      >
+                        <path
+                          d="M6 9l6 6 6-6"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </motion.span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key={`${group.id}-content`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden border-t border-gray-700/60 bg-gray-900/60"
+                      >
+                        <div className="p-4 space-y-4">
+                          {group.accounts.map((account, index) => {
+                            const accountId = account.id ?? `${group.id}-${index}`;
+                            const accountText = `${account.bank} ${account.account} (${account.holder})`;
+                            return (
+                              <div
+                                key={accountId}
+                                className="rounded-lg bg-gray-800/70 border border-gray-700/50 p-4"
+                              >
+                                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                  <div>
+                                    {account.relation && (
+                                      <p className="text-hot-pink-400 text-xs font-semibold">
+                                        {account.relation}
+                                      </p>
+                                    )}
+                                    <p className="text-white text-sm font-medium mt-1">
+                                      {account.bank}
+                                      <span className="ml-2 tracking-wide">{account.account}</span>
+                                    </p>
+                                    <p className="text-gray-400 text-xs mt-1">예금주: {account.holder}</p>
+                                  </div>
+                                  <div className="flex flex-col items-start gap-1 sm:items-end">
+                                    <button
+                                      type="button"
+                                      onClick={() => copyAccount(accountId, accountText)}
+                                      className="inline-flex items-center gap-2 rounded-lg bg-gray-700 hover:bg-hot-pink-600 text-white px-4 py-2 text-sm font-medium transition"
+                                    >
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        className="h-4 w-4"
+                                      >
+                                        <path
+                                          d="M9 9.75v-3a1.5 1.5 0 011.5-1.5h6a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-1.5 1.5h-3"
+                                          stroke="currentColor"
+                                          strokeWidth="1.5"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                        <path
+                                          d="M6.75 9.75h6a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-1.5 1.5h-6a1.5 1.5 0 01-1.5-1.5v-6a1.5 1.5 0 011.5-1.5z"
+                                          stroke="currentColor"
+                                          strokeWidth="1.5"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                      </svg>
+                                      {copiedAccount === accountId ? "복사 완료!" : "복사하기"}
+                                    </button>
+                                    {copiedAccount === accountId && (
+                                      <span className="text-hot-pink-400 text-xs">
+                                        계좌번호가 복사되었습니다.
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
         </motion.section>
 
         {/* Directions Section */}

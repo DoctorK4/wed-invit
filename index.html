@@ -21,6 +21,29 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function restoreSpaRoute() {
+        try {
+          var storedPath = sessionStorage.getItem('spa-redirect-path');
+          if (!storedPath) return;
+          sessionStorage.removeItem('spa-redirect-path');
+          var repoName = 'wed-invit';
+          var segments = window.location.pathname.split('/').filter(Boolean);
+          var hasRepoBase = segments.length > 0 && segments[0] === repoName;
+          var normalized = storedPath.startsWith('/') ? storedPath : '/' + storedPath;
+          if (hasRepoBase && !normalized.startsWith('/' + repoName + '/')) {
+            normalized = '/' + repoName + normalized;
+          }
+          if (!hasRepoBase && normalized.startsWith('/' + repoName + '/')) {
+            normalized = normalized.replace('/' + repoName, '');
+            if (normalized === '') normalized = '/';
+          }
+          window.history.replaceState(null, '', normalized);
+        } catch (error) {
+          // sessionStorage may be unavailable; ignore
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

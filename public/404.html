@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>페이지를 찾을 수 없습니다</title>
+    <script>
+      (function () {
+        var repoName = 'wed-invit';
+        var path = window.location.pathname + window.location.search + window.location.hash;
+        try {
+          sessionStorage.setItem('spa-redirect-path', path);
+        } catch (error) {
+          // sessionStorage may be unavailable; ignore
+        }
+        var segments = window.location.pathname.split('/').filter(Boolean);
+        var hasRepoBase = segments.length > 0 && segments[0] === repoName;
+        var basePath = hasRepoBase ? '/' + repoName + '/' : '/';
+        var target = basePath;
+        var origin = window.location.origin;
+        window.location.replace(origin + target);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

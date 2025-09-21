@@ -505,7 +505,7 @@ function AppV2() {
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: false, margin: "-50px", amount: 0.3 }}
-          className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
+          className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 mb-8"
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">참석 의사 전달</h2>
           

@@ -438,6 +438,13 @@ function App() {
           </div>
         </section> */}
 
+        <section
+          className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 text-center"
+        >
+          <h2 className="text-xl font-medium text-hot-pink-500 mb-3">안내 드립니다</h2>
+          <p className="text-sm text-gray-200">※ 별도로 화환 배치공간이 없습니다. 화환은 정중히 사양드립니다.</p>
+        </section>
+
          {/* RSVP Section */}
          <section
           className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 mb-8"

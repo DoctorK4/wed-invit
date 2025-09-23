@@ -42,10 +42,17 @@ function AppV2() {
       description: "",
       accounts: [
         {
+          id: "groom-father",
+          relation: "신랑 아버지",
+          bank: "국민",
+          account: "22421-02-38729",
+          holder: "김종선",
+        },
+        {
           id: "groom-mother",
           relation: "신랑 어머니",
           bank: "농협",
-          account: "3020289902891",
+          account: "302-0289-9028-91",
           holder: "박종수",
         },
       ],
@@ -525,10 +532,23 @@ function AppV2() {
         {/* Wedding Info Section */}
 
         <section
-          className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 text-center"
+          className="mb-8 bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800"
         >
-          <h2 className="text-xl font-medium text-hot-pink-500 mb-3">안내 드립니다</h2>
-          <p className="text-sm text-gray-200">※ 별도로 화환 배치공간이 없습니다. 화환은 정중히 사양드립니다.</p>
+          <h2 className="text-xl font-medium text-hot-pink-500 mb-4 text-center">안내 드립니다</h2>
+          <div className="space-y-4">
+            <div className="bg-gray-800/60 rounded-lg p-4">
+              <h3 className="text-white text-sm font-semibold mb-2">예식 안내</h3>
+              <p className="text-sm text-gray-200 leading-relaxed">※ 별도로 화환 배치공간이 없습니다. 화환은 정중히 사양합니다.</p>
+            </div>
+            <div className="bg-gray-800/60 rounded-lg p-4">
+              <h3 className="text-white text-sm font-semibold mb-2">좌석 안내</h3>
+              <p className="text-sm text-gray-200 leading-relaxed">스몰 웨딩 특성상 모든 좌석은 사전 배정으로 준비됩니다. 아래 참석 의사 전달을 통해 참석 여부를 꼭 알려주시면 당일날 편안한 자리로 안내드리겠습니다.</p>
+            </div>
+            <div className="bg-gray-800/60 rounded-lg p-4">
+              <h3 className="text-white text-sm font-semibold mb-2">식사 안내</h3>
+              <p className="text-sm text-gray-200 leading-relaxed">예식은 1부와 2부 순서로 진행되며, 식사는 1부 순서가 끝난 후부터 뷔페형태로 제공됩니다.</p>
+            </div>
+          </div>
         </section>
 
         {/* RSVP Section */}
@@ -552,11 +572,6 @@ function AppV2() {
             </div>
           ) : (
             <>
-          <div className="text-center mb-6 space-y-1">
-            <p className="text-gray-300 text-sm">저희 결혼식은 <strong>스몰 웨딩 - 지정 좌석제</strong>로 진행됩니다</p>
-            <p className="text-gray-300 text-sm">원활한 착석과 식사를 위해 </p>
-            <p className="text-gray-300 text-sm">참석 여부를 꼭 사전에 알려주세요</p>
-          </div>
             <form onSubmit={handleRSVP} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">

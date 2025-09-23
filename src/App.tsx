@@ -11,6 +11,8 @@ function App() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const scrollLockRef = useRef(0);
   const hasRequestedVideoPreload = useRef(false);
+  const rsvpSectionRef = useRef<HTMLElement | null>(null);
+  const scrollToRSVPTimeoutRef = useRef<number | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [transportation, setTransportation] = useState("no");
@@ -21,6 +23,16 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+
+  useEffect(() => {
+    return () => {
+      if (scrollToRSVPTimeoutRef.current) {
+        window.clearTimeout(scrollToRSVPTimeoutRef.current);
+        scrollToRSVPTimeoutRef.current = null;
+      }
+    };
   }, []);
 
 
@@ -143,7 +155,7 @@ function App() {
 
     if (isMuted) {
       setIsMuted(false);
-      setShowMusicPrompt(false);
+      dismissPrompt();
       a.muted = false;
       try {
         await a.play();
@@ -157,18 +169,20 @@ function App() {
     }
   };
 
-  const startMusic = async () => {
-    const a = audioRef.current;
-    if (!a) return;
-
-    setIsMuted(false);
+  const dismissPrompt = () => {
     setShowMusicPrompt(false);
-    a.muted = false;
-    try {
-      await a.play();
-    } catch (e) {
-      console.log("Audio play failed");
+    if (scrollToRSVPTimeoutRef.current) {
+      window.clearTimeout(scrollToRSVPTimeoutRef.current);
+      scrollToRSVPTimeoutRef.current = null;
     }
+  };
+
+  const openRSVP = () => {
+    dismissPrompt();
+    scrollToRSVPTimeoutRef.current = window.setTimeout(() => {
+      rsvpSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToRSVPTimeoutRef.current = null;
+    }, 120);
   };
 
   const resetRSVP = () => {
@@ -207,36 +221,38 @@ function App() {
       {/* Music Prompt */}
       {showMusicPrompt && (
         <motion.div
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-6 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-gray-900/90 rounded-2xl p-8 max-w-sm text-center border border-gray-700 shadow-xl"
+            className="bg-gray-900/90 rounded-2xl p-8 max-w-sm w-full text-center border border-gray-700 shadow-xl space-y-6"
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="text-6xl mb-4">🎵</div>
-            <h3 className="text-white text-xl font-medium mb-2">음악과 함께 하실까요?</h3>
-            <p className="text-gray-300 text-sm mb-6"></p>
-            <div className="flex gap-3 justify-center">
+            {/* <div className="text-hot-pink-500 text-sm uppercase tracking-[0.3em]">RSVP</div> */}
+            <h3 className="text-white text-xl font-medium">참석 의사를 알려주세요</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              버튼을 눌러 참석 의사 전달 폼으로 이동하실 수 있어요.
+            </p>
+            <div className="grid gap-3">
               <motion.button
-                onClick={startMusic}
-                className="bg-hot-pink-600 hover:bg-hot-pink-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.05 }}
+                onClick={openRSVP}
+                className="w-full bg-hot-pink-600 hover:bg-hot-pink-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.95 }}
               >
-                🎵 음악 켜기
+                참석 의사 전달하기
               </motion.button>
               <motion.button
-                onClick={() => setShowMusicPrompt(false)}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.05 }}
+                onClick={dismissPrompt}
+                className="w-full bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors border border-gray-700"
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.95 }}
               >
-                건너뛰기
+                나중에 할게요
               </motion.button>
             </div>
           </motion.div>
@@ -458,9 +474,10 @@ function App() {
           </div>
         </section>
 
-         {/* RSVP Section */}
-         <section
+        {/* RSVP Section */}
+        <section
           className="bg-gray-900/80 rounded-lg p-6 shadow-lg border border-gray-800 mb-8"
+          ref={rsvpSectionRef}
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">참석 의사 전달</h2>
           

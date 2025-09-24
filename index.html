@@ -10,7 +10,7 @@
     <meta property="og:title" content="희진 & 동률의 결혼식에 초대합니다 💍" />
     <meta property="og:description" content="2025년 11월 2일, 소중한 분들을 초대합니다." />
     <meta property="og:image" content="https://elliedrkwedding.site/images/Our%20Wedding.jpg" />
-    <meta property="og:url" content="https://elliedrkwedding.site/" />
+    <meta property="og:url" id="og-url" content="" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card Meta Tags -->
@@ -18,6 +18,9 @@
     <meta name="twitter:title" content="희진 & 동률의 결혼식 초대장" />
     <meta name="twitter:description" content="2025년 11월 2일, 함께해 주세요." />
     <meta name="twitter:image" content="https://elliedrkwedding.site/images/Our%20Wedding.jpg" />
+    <script>
+      document.getElementById('og-url').setAttribute('content', window.location.href);
+    </script>
   </head>
   <body>
     <div id="root"></div>

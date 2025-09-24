@@ -2,8 +2,24 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <title>페이지를 찾을 수 없습니다</title>
+    <title>희진 & 동률의 결혼식</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="희진 & 동률의 결혼식에 초대합니다 💍" />
+    <meta property="og:description" content="2025년 11월 2일, 소중한 분들을 초대합니다." />
+    <meta property="og:image" content="https://elliedrkwedding.site/images/Our%20Wedding.jpg" />
+    <meta property="og:url" id="og-url" content="" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="희진 & 동률의 결혼식 초대장" />
+    <meta name="twitter:description" content="2025년 11월 2일, 함께해 주세요." />
+    <meta name="twitter:image" content="https://elliedrkwedding.site/images/Our%20Wedding.jpg" />
+    
     <script>
+      // Set OG URL before redirect
+      document.getElementById('og-url').setAttribute('content', window.location.href);
+      
       (function () {
         var repoName = 'wed-invit';
         var path = window.location.pathname + window.location.search + window.location.hash;

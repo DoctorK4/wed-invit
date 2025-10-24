@@ -1,4 +1,4 @@
-import { addRSVP } from "../api/addRSVP";
+// import { addRSVP } from "../api/addRSVP";
 import { useEffect, useRef, useState } from "react";
 // import { addToCalendar } from "./service/addToCalendar";
 import Gallery from "./Gallery";
@@ -13,13 +13,13 @@ function AppV2() {
   const hasRequestedVideoPreload = useRef(false);
   const copyTimeoutRef = useRef<number | null>(null);
   const scrollToRSVPTimeoutRef = useRef<number | null>(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [transportation, setTransportation] = useState("no");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [name, setName] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [transportation, setTransportation] = useState("no");
+  // const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [showMusicPrompt, setShowMusicPrompt] = useState(true);
+  const [showMusicPrompt, setShowMusicPrompt] = useState(false);
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const rsvpSectionRef = useRef<HTMLElement | null>(null);
@@ -236,28 +236,28 @@ function AppV2() {
     }, 120);
   };
 
-  const resetRSVP = () => {
-    setIsSubmitted(false);
-    setName("");
-    setPhone("");
-    setTransportation("no");
-  };
+  // const resetRSVP = () => {
+  //   setIsSubmitted(false);
+  //   setName("");
+  //   setPhone("");
+  //   setTransportation("no");
+  // };
 
-  const handleRSVP = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      await addRSVP(name, phone, transportation === "yes");
-      setIsSubmitted(true);
-      setIsLoading(false);
-      setName("");
-      setPhone("");
-      setTransportation("no");
-    } catch (error) {
-      console.error("RSVP 전송 실패:", error);
-      setIsLoading(false);
-    }
-  };
+  // const handleRSVP = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     await addRSVP(name, phone, transportation === "yes");
+  //     setIsSubmitted(true);
+  //     setIsLoading(false);
+  //     setName("");
+  //     setPhone("");
+  //     setTransportation("no");
+  //   } catch (error) {
+  //     console.error("RSVP 전송 실패:", error);
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const setCopiedState = (accountId: string) => {
     setCopiedAccount(accountId);
@@ -567,8 +567,16 @@ function AppV2() {
           ref={rsvpSectionRef}
         >
           <h2 className="text-xl font-medium text-hot-pink-500 text-center mb-4">참석 의사 전달</h2>
-          
-          {isSubmitted ? (
+
+          {/* 마감 안내 */}
+          <div className="text-center p-4">
+            <div className="text-hot-pink-500 text-lg mb-2">💖</div>
+            <p className="text-hot-pink-400 font-medium">참석 의사 전달이 마감되었습니다</p>
+            <p className="text-gray-300 text-sm mt-1">소중한 마음 감사드립니다.</p>
+          </div>
+
+          {/* 폼 주석처리 */}
+          {/* {isSubmitted ? (
             <div className="text-center p-4">
               <div className="text-hot-pink-500 text-lg mb-2">💖</div>
               <p className="text-hot-pink-400 font-medium">참석 의사가 전달되었습니다!</p>
@@ -598,7 +606,7 @@ function AppV2() {
                   disabled={isLoading}
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">
                   📞 연락처
@@ -613,7 +621,7 @@ function AppV2() {
                   required
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   🚗 자차 방문여부
@@ -632,7 +640,7 @@ function AppV2() {
                     />
                     <span className="ml-2 text-gray-300 text-sm">네</span>
                   </label>
-                  
+
                   <label className="flex items-center cursor-pointer">
                     <input
                       type="radio"
@@ -648,7 +656,7 @@ function AppV2() {
                   </label>
                 </div>
               </div>
-              
+
               <button
                 type="submit"
                 disabled={isLoading}
@@ -684,7 +692,7 @@ function AppV2() {
               </button>
             </form>
             </>
-          )}
+          )} */}
         </section>
 
         {/* Appreciation Section */}
